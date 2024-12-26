@@ -126,7 +126,7 @@ const createSignup = async (req, res) => {
         // Check if username already exists
         const existingUser = await UserSignup.find({ username });
         console.log(existingUser, "------------existingUser------------");
-        if (existingUser) {
+        if (existingUser.length > 0) {
             return res.status(400).json({ message: "Username already exists" });
         }
 
@@ -136,12 +136,7 @@ const createSignup = async (req, res) => {
         // Create new user
         const newUser = await UserSignup.create({ username, password: hashedPassword });
 
-        // // Generate JWT token
-        // const token = jwt.sign({ id: newUser._id, username: newUser.username }, secretKey, {
-        //     expiresIn: "1h",
-        // });
-
-        res.status(201).json({ message: "User registered successfully", token });
+        res.status(201).json({ message: "User registered successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "An error occurred. Please try again." });
