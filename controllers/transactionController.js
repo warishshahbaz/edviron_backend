@@ -121,11 +121,11 @@ const createSignup = async (req, res) => {
     }
 
     try {
-        console.log(username, password);
+        // console.log(username, password);
 
         // Check if username already exists
         const existingUser = await UserSignup.find({ username });
-        console.log(existingUser, "------------existingUser------------");
+        // console.log(existingUser, "------------existingUser------------");
         if (existingUser.length > 0) {
             return res.status(400).json({ message: "Username already exists" });
         }
@@ -156,7 +156,7 @@ const createLogin = async (req, res) => {
     try {
         // Find the user
         const user = await UserSignup.findOne({ username }); // Use findOne and await
-        console.log(user, "-----------------user----------------")
+        // console.log(user, "-----------------user----------------")
         if (!user) {
             return res.status(400).json({ message: "Invalid username or password" });
         }
